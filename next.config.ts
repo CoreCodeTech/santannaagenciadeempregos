@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
     }
     return config;
   },
+  turbopack: {
+    // Adicione isso aqui para silenciar o erro e aceitar o Webpack customizado acima no build
+  },
 };
 
 export default nextConfig;
