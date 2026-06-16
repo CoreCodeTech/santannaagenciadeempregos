@@ -1,0 +1,205 @@
+.container {
+  display: flex;
+  flex-direction: column; /* Essencial para empilhar o logo acima da caixa */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8fafc; /* Slate claro muito elegante */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 20px;
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 16px; /* Bordas mais suaves e modernas */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid #e2e8f0;
+}
+
+/* Branding Sant'Anna */
+.logoContainer {
+  text-align: center;
+  margin-bottom: 24px; /* Espaço para a caixinha respirar logo abaixo do nome */
+}
+
+.logoMain {
+  font-size: 24px;
+  font-weight: 800;
+  color: #4f46e5;
+  letter-spacing: -0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoSubtitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 8px;
+  color: #0f172a; /* Slate escuro profissional */
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 28px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* Alertas de Mensagem */
+.message {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  border: 1px solid transparent;
+}
+
+.messageSucesso {
+  background-color: #f0fdf4;
+  color: #166534;
+  border-color: #bbf7d0;
+}
+
+.messageErro {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
+
+/* Formulário e Inputs */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formGroup label {
+  font-size: 13px;
+  color: #475569;
+  font-weight: 600;
+}
+
+.input {
+  padding: 11px 14px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 15px;
+  color: #0f172a;
+  background-color: #ffffff;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input:focus {
+  border-color: #4f46e5; /* Indigo para destaque profissional */
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+.input::placeholder {
+  color: #94a3b8;
+}
+
+/* Botão Principal */
+.btnSubmit {
+  padding: 13px;
+  border-radius: 8px;
+  border: none;
+  background-color: #4f46e5;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.btnSubmit:hover:not(:disabled) {
+  background-color: #4338ca;
+}
+
+.btnSubmit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btnSubmit:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Footer / Troca de modo */
+.footer {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.footerText {
+  color: #64748b;
+}
+
+.btnToggle {
+  background: none;
+  border: none;
+  color: #4f46e5;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 0 0 4px;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.btnToggle:hover {
+  color: #3730a3;
+  text-decoration: underline;
+}
+
+/* Adicione isso no fim do seu arquivo login.module.css */
+.labelPasswordRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.btnForgotPassword {
+  background: none;
+  border: none;
+  color: #4f46e5;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s ease;
+}
+
+.btnForgotPassword:hover {
+  color: #3730a3;
+  text-decoration: underline;
+}
