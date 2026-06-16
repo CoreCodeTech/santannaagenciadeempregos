@@ -49,34 +49,6 @@ export default function AdminPage() {
     });
   };
 
-  useEffect(() => {
-    const verificarAdmin = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        router.push('/login');
-        return;
-      }
-
-      const { data: perfil } = await supabase
-        .from('perfis')
-        .select('role')
-        .eq('id', user.id)
-        .single();
-
-      if (perfil?.role !== 'admin') {
-        alert('Acesso negado.');
-        router.push('/painel');
-        return;
-      }
-
-      await carregarCategorias();
-      await carregarDadosGlobais();
-      setLoading(false);
-    };
-
-    verificarAdmin();
-  }, [router]);
-
   // 🔥 NOVA FUNÇÃO: Carrega as categorias cadastradas no banco de dados
   const carregarCategorias = async () => {
     const { data, error } = await supabase
@@ -88,6 +60,55 @@ export default function AdminPage() {
       setCategoriasDB(data);
     }
   };
+
+  const carregarDadosGlobais = async () => {
+    const { data: listaVagas } = await supabase
+      .from('vagas')
+      .select('*, candidaturas(id)')
+      .order('criado_em', { ascending: false });
+    setVagas(listaVagas || []);
+
+    const { data: listaCands } = await supabase
+      .from('candidaturas')
+      .select('*, vagas(titulo, categoria)');
+    setTodasCandidaturas(listaCands || []);
+  };
+
+  useEffect(() => {
+    const verificarAdmin = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+          router.push('/login');
+          return;
+        }
+
+        const { data: perfil } = await supabase
+          .from('perfis')
+          .select('role')
+          .eq('id', user.id)
+          .single();
+
+        if (perfil?.role !== 'admin') {
+          alert('Acesso negado.');
+          router.push('/painel');
+          return;
+        }
+
+        // Executa as dependências de dados apenas se a validação passar
+        await carregarCategorias();
+        await carregarDadosGlobais();
+      } catch (err) {
+        console.error('Erro na autenticação:', err);
+        router.push('/login');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    verificarAdmin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router]);
 
   // 🔥 NOVA FUNÇÃO: Adiciona uma nova categoria via painel
   const handleAdicionarCategoria = async (e: React.FormEvent) => {
@@ -129,19 +150,6 @@ export default function AdminPage() {
     } catch (err: any) {
       alert('Erro ao excluir categoria: ' + err.message);
     }
-  };
-
-  const carregarDadosGlobais = async () => {
-    const { data: listaVagas } = await supabase
-      .from('vagas')
-      .select('*, candidaturas(id)')
-      .order('criado_em', { ascending: false });
-    setVagas(listaVagas || []);
-
-    const { data: listaCands } = await supabase
-      .from('candidaturas')
-      .select('*, vagas(titulo, categoria)');
-    setTodasCandidaturas(listaCands || []);
   };
 
   const handleSalvarVaga = async (e: React.FormEvent) => {
