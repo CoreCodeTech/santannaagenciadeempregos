@@ -1,0 +1,623 @@
+:root {
+  --primary-color: #5d24b3;      /* Roxo Principal */
+  --accent-color: #c084fc;       /* Roxo Clarinho */
+  --dark-bg: #111827;            /* Body / Texto Escuro */
+  --white: #ffffff;              /* Branco */
+  --bg-light: #f5f5f7;           /* Cinza claro oficial Apple para fundos de cards/inputs */
+  --text-muted: #86868b;         /* Subtextos Apple */
+  --transition-apple: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.containerPortal {
+  min-height: 100vh;
+  background-color: var(--bg-light);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: var(--dark-bg);
+  width: 100%;
+}
+
+/* NAVBAR AJUSTADA - MAIS PROFISSIONAL */
+.headerPortal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 40px;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logoEmoji {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: var(--white);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 18px;
+  box-shadow: 0 4px 12px rgba(93, 36, 179, 0.2);
+}
+
+.logoTitulo {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #111827 30%, var(--primary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btnSair {
+  padding: 8px 16px;
+  background-color: #fff;
+  color: #ef4444;
+  border: 1px solid #fee2e2;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: var(--transition-apple);
+}
+
+.btnSair:hover {
+  background-color: #fee2e2;
+}
+
+/* 💻 GRID CONTÊINER DESKTOP: OCUPA 100% DA TELA E ESPALHA AS 4 COLUNAS SEPARADAS */
+.gridContainer {
+  width: 100%;
+  padding: 24px;
+  display: grid;
+  /* Coluna 1: Filtro (260px) | Coluna 2: Vagas (Centro flexível) | Coluna 3: Candidaturas (300px) | Coluna 4: Perfil (340px) */
+  grid-template-columns: 260px 1fr 300px 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* 📌 FIXAÇÃO DAS COLUNAS LATERAIS NO DESKTOP (Rola apenas o centro de vagas) */
+.filtroColuna,
+.candidaturasColuna,
+.perfilColuna {
+  position: sticky;
+  top: 90px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Scrollbars discretas para as áreas fixas do desktop */
+.filtroColuna::-webkit-scrollbar,
+.candidaturasColuna::-webkit-scrollbar,
+.perfilColuna::-webkit-scrollbar {
+  width: 4px;
+}
+.filtroColuna::-webkit-scrollbar-thumb,
+.candidaturasColuna::-webkit-scrollbar-thumb,
+.perfilColuna::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+}
+
+/* 🔍 COLUNA 1: FILTROS INTEGRADOS (SEM FORMATO DE BALÃO FLUTUANTE) */
+.buscaFiltrosContainer {
+  background-color: var(--white);
+  padding: 20px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.filtroItemInput,
+.filtroItemSelect {
+  width: 100%;
+}
+
+.inputBusca,
+.selectFiltro {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: var(--dark-bg);
+  background-color: var(--bg-light);
+  font-size: 13px;
+  font-weight: 500;
+  outline: none;
+  transition: var(--transition-apple);
+}
+
+.inputBusca:focus,
+.selectFiltro:focus {
+  border-color: var(--primary-color);
+  background-color: var(--white);
+  box-shadow: 0 0 0 3px rgba(93, 36, 179, 0.1);
+}
+
+/* TÍTULOS DAS SEÇÕES */
+.tituloSecao {
+  margin: 0 0 16px 4px;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.tituloSecaoEscorada {
+  margin: 0 0 16px 4px;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+/* 🟢 COLUNA 2: CENTRO (VAGAS DISPONÍVEIS COM SCROLL NATURAL) */
+.vagasColuna {
+  display: flex;
+  flex-direction: column;
+}
+
+.vagasLista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vagasVazias {
+  background-color: var(--white);
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.vagasVaziasTexto {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* CARD DA VAGA */
+.vagaCard {
+  background-color: var(--white);
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: var(--transition-apple);
+}
+
+.vagaCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02);
+}
+
+.vagaHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.vagaBadges {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.badgeCodigo {
+  font-size: 11px;
+  background-color: var(--bg-light);
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.badgeCategoria {
+  font-size: 11px;
+  background-color: rgba(93, 36, 179, 0.08);
+  color: var(--primary-color);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.badgeStatus {
+  font-size: 11px;
+  background-color: #d1fae5;
+  color: #065f46;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.vagaTitulo {
+  margin: 0 0 6px 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--dark-bg);
+  letter-spacing: -0.3px;
+}
+
+.vagaDetalhes {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.vagaSalario {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.vagaBotao {
+  padding: 12px 22px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: var(--transition-apple);
+  box-shadow: 0 4px 12px rgba(93, 36, 179, 0.15);
+}
+
+.vagaBotao:hover {
+  background-color: #4b1b96;
+  box-shadow: 0 6px 16px rgba(93, 36, 179, 0.25);
+}
+
+.vagaDivisor {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.vagaDescricao {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #424245;
+  white-space: pre-line;
+}
+
+/* 📝 CARDS DE PAINEL (PERFIL E CANDIDATURAS) */
+.perfilCard,
+.candidaturasCard {
+  background-color: var(--white);
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.perfilDesktopHeader {
+  display: block;
+}
+
+.perfilTitulo {
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dark-bg);
+  letter-spacing: -0.3px;
+}
+
+.perfilSubtitulo {
+  margin: 0 0 16px 0;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.perfilToggleBtn {
+  display: none; /* Ocultado por padrão no desktop */
+}
+
+.perfilConteudo {
+  display: block;
+}
+
+.perfilConteudoAberto {
+  display: block !important;
+}
+
+.perfilForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dark-bg);
+  display: block;
+  margin-bottom: 6px;
+  padding-left: 2px;
+}
+
+.formInput,
+.formTextarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  color: var(--dark-bg);
+  background-color: var(--bg-light);
+  font-family: inherit;
+  outline: none;
+  transition: var(--transition-apple);
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  border-color: var(--primary-color);
+  background-color: var(--white);
+  box-shadow: 0 0 0 3px rgba(93, 36, 179, 0.12);
+}
+
+/* UPLOAD AREA */
+.uploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: var(--bg-light);
+  border: 2px dashed rgba(93, 36, 179, 0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: var(--transition-apple);
+}
+
+.uploadLabel:hover {
+  background-color: rgba(93, 36, 179, 0.03);
+  border-color: var(--primary-color);
+}
+
+.uploadIcon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.uploadTextoPrincipal {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.uploadTextoSecundario {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.uploadSucessoMsg {
+  margin: 8px 0 0 0;
+  font-size: 11px;
+  color: #16a34a;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btnSalvarPerfil {
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-apple);
+  box-shadow: 0 4px 12px rgba(93, 36, 179, 0.15);
+}
+
+.btnSalvarPerfil:hover {
+  background-color: #4b1b96;
+  box-shadow: 0 6px 16px rgba(93, 36, 179, 0.25);
+}
+
+/* BOTÃO PLATAFORMA DE CURRÍCULO */
+.btnCriarCurriculo {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding: 12px;
+  background-color: rgba(93, 36, 179, 0.06);
+  color: var(--primary-color);
+  border: 1px dashed rgba(93, 36, 179, 0.4);
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: var(--transition-apple);
+}
+
+.btnCriarCurriculo:hover {
+  background-color: rgba(93, 36, 179, 0.12);
+  border-color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+/* 💼 SEÇÃO DE CANDIDATURAS */
+.candidaturasTitulo {
+  margin: 0 0 16px 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.candidaturasVazio {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.candidaturasLista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.candidaturaItem {
+  padding: 14px;
+  background-color: var(--bg-light);
+  border-radius: 10px;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.candidaturaVagaNome {
+  font-weight: 600;
+  color: var(--dark-bg);
+}
+
+.candidaturaCodigo {
+  color: var(--text-muted);
+  margin-right: 6px;
+}
+
+.candidaturaBadgeContainer {
+  display: flex;
+  margin-top: 2px;
+}
+
+.candidaturaBadge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.loadingContainer {
+  padding: 50px;
+  text-align: center;
+  font-family: inherit;
+  color: var(--text-muted);
+}
+
+/* 📱 RESPONSIVIDADE E ADAPTAÇÃO MOBILE EXATA DA FILA DE REQUISITOS */
+@media (max-width: 1200px) {
+  .gridContainer {
+    grid-template-columns: 220px 1fr 260px; /* Esconde temporariamente a 4ª coluna ou joga pra baixo se quebrar no meio termo */
+  }
+}
+
+@media (max-width: 1024px) {
+  .gridContainer {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 16px 12px !important;
+    gap: 24px !important;
+  }
+
+  .headerPortal {
+    padding: 16px 20px !important;
+  }
+
+  /* Anula as posições coladas do desktop no mobile */
+  .filtroColuna,
+  .vagasColuna,
+  .candidaturasColuna,
+  .perfilColuna {
+    position: static !important;
+    max-height: none !important;
+    width: 100% !important;
+    overflow-y: visible !important;
+  }
+
+  /* 📲 ORDENAÇÃO MOBILE COMPLETA EXIGIDA */
+  .perfilColuna {
+    order: 1; /* 1. Meu Perfil Profissional (No Topo) */
+  }
+  .candidaturasColuna {
+    order: 2; /* 2. Minhas Candidaturas */
+  }
+  .filtroColuna {
+    order: 3; /* 3. Div Pesquisa */
+  }
+  .vagasColuna {
+    order: 4; /* 4. Oportunidades / Vagas */
+  }
+
+  /* SANFONA (EXPANDIR/ENCOLHER) ATIVA NO MOBILE */
+  .perfilDesktopHeader,
+  .tituloSecaoEscorada {
+    display: none !important;
+  }
+
+  .perfilToggleBtn {
+    display: flex !important;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 4px 0;
+    cursor: pointer;
+    color: var(--dark-bg);
+    outline: none;
+  }
+
+  .perfilToggleBtnText {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary-color);
+    background-color: rgba(93, 36, 179, 0.08);
+    padding: 6px 12px;
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  .perfilConteudo {
+    display: none; /* Esconde por padrão usando o controle de classe do react */
+    margin-top: 16px;
+  }
+
+  /* Elementos internos do card de vagas se ajustando em lista vertical no mobile */
+  .vagaHeader {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .vagaBotao {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .buscaFiltrosContainer {
+    position: static !important;
+    box-shadow: none !important;
+  }
+}
