@@ -1,0 +1,506 @@
+:root {
+  --primary-color: #5d24b3;
+  --accent-color: #c084fc;
+  --dark-bg: #111827;
+  --white: #ffffff;
+  --bg-light: #f5f5f7;
+  --text-muted: #86868b;
+  --transition-apple: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.containerPage {
+  min-height: 100vh;
+  background-color: #f4f6f9;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--dark-bg);
+  padding-bottom: 40px;
+}
+
+/* NAVBAR HEADER */
+.headerNav {
+  background-color: var(--white);
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.headerContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.btnVoltar {
+  padding: 8px 16px;
+  background-color: var(--bg-light);
+  color: var(--dark-bg);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: var(--transition-apple);
+}
+
+.btnVoltar:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.tituloHeader {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+/* LAYOUT GRID DE DUAS COLUNAS (DESKTOP) */
+.gridCriar {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* COLUNA DO FORMULÁRIO */
+.cardForm {
+  background-color: var(--white);
+  padding: 28px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+}
+
+.secaoTitulo {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.flexHeaderSecao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.formRow {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.formGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #475569;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background-color: var(--bg-light);
+  color: var(--dark-bg);
+  outline: none;
+  font-size: 14px;
+  transition: var(--transition-apple);
+}
+
+.input:focus {
+  border-color: var(--primary-color);
+  background-color: var(--white);
+  box-shadow: 0 0 0 3px rgba(93, 36, 179, 0.1);
+}
+
+.textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background-color: var(--bg-light);
+  color: var(--dark-bg);
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  transition: var(--transition-apple);
+}
+
+.textarea:focus {
+  border-color: var(--primary-color);
+  background-color: var(--white);
+  box-shadow: 0 0 0 3px rgba(93, 36, 179, 0.1);
+}
+
+.divisor {
+  border: 0;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.06);
+  margin: 24px 0;
+}
+
+.blocoDinamico {
+  background-color: #fafafa;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  margin-bottom: 16px;
+}
+
+.btnAdicionar {
+  padding: 6px 12px;
+  background-color: rgba(93, 36, 179, 0.08);
+  color: var(--primary-color);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btnRemover {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 4px;
+}
+
+.btnBaixarPDF {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 16px;
+  box-shadow: 0 4px 12px rgba(93, 36, 179, 0.2);
+  transition: var(--transition-apple);
+}
+
+.btnBaixarPDF:hover {
+  background-color: #4b1b96;
+}
+
+/* COLUNA DO PREVIEW (FOLHA A4 MODELO) */
+.colunaPreview {
+  position: sticky;
+  top: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.folhaA4 {
+  background-color: var(--white);
+  width: 100%;
+  max-width: 210mm;
+  min-height: 297mm;
+  padding: 20mm;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.previewHeader {
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.previewNome {
+  margin: 0 0 6px 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--dark-bg);
+}
+
+.previewCargoSub {
+  margin: 0 0 12px 0;
+  font-size: 15px;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.previewContatoGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 12px;
+  color: #4b5563;
+}
+
+.previewSecao {
+  margin-bottom: 24px;
+}
+
+.previewSecaoTitulo {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--primary-color);
+  font-weight: 700;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding-bottom: 4px;
+}
+
+.previewTextoTextarea {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #374151;
+  white-space: pre-wrap;
+}
+
+.previewItem {
+  margin-bottom: 14px;
+}
+
+.previewItemHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--dark-bg);
+}
+
+.previewItemPeriodo {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.previewEmpresaSub {
+  margin: 2px 0 6px 0;
+  font-size: 12px;
+  color: #4b5563;
+  font-style: italic;
+}
+
+.previewHabilidadesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.previewHabilidadeTag {
+  background-color: var(--bg-light);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--dark-bg);
+  font-weight: 500;
+}
+
+/* BARRA DE NAVEGAÇÃO MOBILE (Invisível no Desktop) */
+.mobileTabs {
+  display: none;
+}
+
+/* ==========================================================================
+   MEDIA QUERY PARA RESPONSIVIDADE EM TABLETS E SMARTPHONES (TELA)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .containerPage {
+    padding-bottom: 80px;
+  }
+
+  .gridCriar {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 32px;
+  }
+
+  .headerNav {
+    padding: 12px 16px;
+  }
+
+  .tituloHeader {
+    font-size: 16px;
+  }
+
+  .formRow {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cardForm {
+    padding: 20px;
+  }
+
+  .colunaPreview {
+    position: static;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 40px;
+  }
+
+  .folhaA4 {
+    padding: 15mm;
+    min-height: auto;
+    font-size: 90%; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .previewNome {
+    font-size: 22px;
+  }
+}
+
+/* ==========================================================================
+   REGRAS DE IMPRESSÃO CIRÚRGICAS (CORRIGIDO PARA CSS MODULES)
+   ========================================================================== */
+@media print {
+  /* O Next.js exige :global() para estilizar tags raiz/globais em CSS Modules */
+  :global(html), :global(body) {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  :global(noscript) {
+    display: none !important;
+  }
+
+  .headerNav,
+  .cardForm, /* Garante o sumiço do formulário */
+  :global(.no-print) {
+    display: none !important;
+  }
+
+  .containerPage {
+    background-color: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .gridCriar {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .colunaPreview {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  .folhaA4 {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important; 
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+  }
+
+  @page {
+    margin: 0 !important;
+  }
+
+  /* Como zeramos a margem da página inteira, precisamos dar um padding interno 
+     na folha A4 para o texto do currículo não ficar colado na borda do papel */
+  .folhaA4 {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 20mm !important; /* Movemos a margem para dentro do elemento */
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+  }
+}
+
+.printTipBox {
+  background-color: #f8fafc; /* Fundo cinza azulado bem leve e profissional */
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 15px 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.printTipHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.printTipIcon {
+  font-size: 14px;
+}
+
+.printTipTitle {
+  font-size: 13px;
+  color: #334155;
+  font-weight: 600;
+}
+
+.printTipClose {
+  position: absolute;
+  right: -4px;
+  top: -4px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #64748b;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.printTipClose:hover {
+  opacity: 1;
+}
+
+.printTipText {
+  margin: 0 0 6px 0;
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.printTipList {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.printTipList li {
+  margin-bottom: 2px;
+}
