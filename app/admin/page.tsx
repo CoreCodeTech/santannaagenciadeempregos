@@ -684,7 +684,7 @@ export default function AdminPage() {
                     borderRadius: '6px', fontSize: '14px', fontWeight: 600, color: '#374151', cursor: 'pointer'
                   }}
                 >
-                  {mostrarGerenciadorCategorias ? '📁 Ocultar Categorias' : '📁 Gerenciar Categorias Banco'}
+                  {mostrarGerenciadorCategorias ? '📁 Ocultar Categorias' : '📁 Gerenciamento de Categorias'}
                 </button>
 
                 {mostrarGerenciadorCategorias && (
