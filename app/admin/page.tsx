@@ -688,7 +688,7 @@ export default function AdminPage() {
                 </button>
 
                 {mostrarGerenciadorCategorias && (
-                  <div style={{ marginTop: '15px', background: '#f9fafb', padding: '15px', borderRadius: '6px', border: '1px solid #e5e7eb' , color: '#4b5563'}}>
+                  <div style={{ marginTop: '15px', background: '#f9fafb', padding: '15px', borderRadius: '6px', border: '1px solid #e5e7eb', color: '#4b5563' }}>
                     <form onSubmit={handleAdicionarCategoria} style={{ display: 'flex', gap: '8px', marginBottom: '15px' }}>
                       <input
                         type="text"
