@@ -21,9 +21,11 @@ export default function PainelPage() {
   const [busca, setBusca] = useState('');
   const [categoriaFiltro, setCategoriaFiltro] = useState('');
   const [localizacaoFiltro, setLocalizacaoFiltro] = useState('');
+  const [statusCandidaturaFiltro, setStatusCandidaturaFiltro] = useState('');
 
-  // Controle de abertura do perfil no mobile
+  // Controle de abertura do perfil e candidaturas no mobile
   const [perfilAbertoMobile, setPerfilAbertoMobile] = useState(false);
+  const [candidaturasAbertoMobile, setCandidaturasAbertoMobile] = useState(false);
 
   // Estados do Perfil do Candidato
   const [nome, setNome] = useState('');
@@ -110,8 +112,9 @@ export default function PainelPage() {
     if (localizacaoFiltro !== '') {
       resultado = resultado.filter(v => v.localizacao === localizacaoFiltro);
     }
+    
     setVagasFiltradas(resultado);
-  }, [busca, categoriaFiltro, localizacaoFiltro, vagas]);
+  }, [busca, categoriaFiltro, localizacaoFiltro, vagas, candidatadoIds]);
 
   const handleSalvarPerfil = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -209,7 +212,14 @@ export default function PainelPage() {
 
   const categoriasDisponiveis = Array.from(new Set(vagas.map(v => v.categoria).filter(Boolean)));
   const localizacoesDisponiveis = Array.from(new Set(vagas.map(v => v.localizacao).filter(Boolean)));
-  const minhasVagasInscritas = vagas.filter(v => candidatadoIds.includes(v.id));
+  
+  let minhasVagasInscritas = vagas.filter(v => candidatadoIds.includes(v.id));
+  if (statusCandidaturaFiltro !== '') {
+    minhasVagasInscritas = minhasVagasInscritas.filter(vaga => {
+      const dadosCand = minhasCandidaturasComStatus.find(c => c.vaga_id === vaga.id);
+      return (dadosCand?.status || 'novo') === statusCandidaturaFiltro;
+    });
+  }
 
   if (loading) {
     return <div className={styles.loadingContainer}>Carregando dados do portal...</div>;
@@ -230,10 +240,15 @@ export default function PainelPage() {
         `}
       </Script>
 
-      {/* NAVBAR */}
       <header className={styles.headerPortal}>
         <div className={styles.logoContainer}>
-          <div className={styles.logoEmoji}>💼</div>
+          <a href="http://santannaagenciadeempregos.com.br/" target="_blank" rel="noopener noreferrer">
+            <img 
+              src="https://santannaagenciadeempregos.com.br/img/logo.png" 
+              alt="Logo" 
+              style={{ width: '67px', height: 'auto', marginRight: '10px', borderRadius: '10px', boxShadow: '2px 2px 15px var(--accent-color)' }} 
+            />
+          </a>
           <h2 className={styles.logoTitulo}>Portal de Vagas Sant'Anna</h2>
         </div>
         <button
@@ -246,10 +261,8 @@ export default function PainelPage() {
           Sair
         </button>
       </header>
-      {/* 4-COLUMN DESKTOP GRID CONTAINER */}
-      <div className={styles.gridContainer}>
 
-        {/* COLUNA 1: FILTRO DE PESQUISA (CANTO ESQUERDO ENCOSTADO) */}
+      <div className={styles.gridContainer}>
         <section className={styles.filtroColuna}>
           <h3 className={styles.tituloSecao}>Busca & Filtros</h3>
           <div className={styles.buscaFiltrosContainer}>
@@ -289,10 +302,8 @@ export default function PainelPage() {
           </div>
         </section>
 
-        {/* COLUNA 2: CENTRO - VAGAS DISPONÍVEIS (ROLANDO) */}
         <section className={styles.vagasColuna}>
           <h3 className={styles.tituloSecao}>Oportunidades Disponíveis</h3>
-
           {vagasFiltradas.length === 0 ? (
             <div className={styles.vagasVazias}>
               <p className={styles.vagasVaziasTexto}>Nenhuma vaga aberta encontrada para os filtros aplicados.</p>
@@ -301,21 +312,15 @@ export default function PainelPage() {
             <div className={styles.vagasLista}>
               {vagasFiltradas.map((vaga) => {
                 const jaInscrito = candidatadoIds.includes(vaga.id);
-
                 return (
                   <div key={vaga.id} className={styles.vagaCard}>
                     <div className={styles.vagaHeader}>
                       <div>
                         <div className={styles.vagaBadges}>
-                          <span className={styles.badgeCodigo}>
-                            {vaga.codigo_vaga}
-                          </span>
-                          <span className={styles.badgeCategoria}>
-                            📁 {vaga.categoria || 'Geral'}
-                          </span>
+                          <span className={styles.badgeCodigo}>{vaga.codigo_vaga}</span>
+                          <span className={styles.badgeCategoria}>📁 {vaga.categoria || 'Geral'}</span>
                           <span className={styles.badgeStatus}>🟢 Disponível ({vaga.vagas_disponiveis} de {vaga.vagas_totais} restando)</span>
                         </div>
-
                         <h4 className={styles.vagaTitulo}>{vaga.titulo}</h4>
                         <div className={styles.vagaDetalhes}>
                           <span>📍 {vaga.localizacao}</span>
@@ -343,84 +348,80 @@ export default function PainelPage() {
           )}
         </section>
 
-        {/* COLUNA 3: ESQUERDO DO PERFIL - MINHAS CANDIDATURAS (FIXA) */}
         <section className={styles.candidaturasColuna}>
           <h3 className={styles.tituloSecao}>Minhas Candidaturas</h3>
+          
           <div className={styles.candidaturasCard}>
-            {minhasVagasInscritas.length === 0 ? (
-              <p className={styles.candidaturasVazio}>Nenhuma inscrição realizada.</p>
-            ) : (
-              <div className={styles.candidaturasLista}>
-                {minhasVagasInscritas.map((vaga) => {
-                  const dadosCand = minhasCandidaturasComStatus.find(c => c.vaga_id === vaga.id);
-                  const stts = dadosCand?.status || 'novo';
+            <button
+              className={styles.perfilToggleBtn}
+              onClick={() => setCandidaturasAbertoMobile(!candidaturasAbertoMobile)}
+              type="button"
+            >
+              <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '700' }}>💼 Minhas Inscrições</h3>
+              <span className={styles.perfilToggleBtnText}>{candidaturasAbertoMobile ? '▲ Recolher' : '▼ Expandir'}</span>
+            </button>
 
-                  let badgeLabel = 'Novo';
-                  let badgeBg = '#d1fae5';
-                  let badgeColor = '#065f46';
-
-                  if (stts === 'analise') {
-                    badgeLabel = 'Em Análise';
-                    badgeBg = '#fef3c7';
-                    badgeColor = '#92400e';
-                  } else if (stts === 'recusado') {
-                    badgeLabel = 'Recusado';
-                    badgeBg = '#fee2e2';
-                    badgeColor = '#991b1b';
-                  }
-
-                  return (
-                    <div key={vaga.id} className={styles.candidaturaItem}>
-                      <span className={styles.candidaturaVagaNome}>
-                        <strong className={styles.candidaturaCodigo}>[{vaga.codigo_vaga}]</strong> {vaga.titulo}
-                      </span>
-                      <div className={styles.candidaturaBadgeContainer}>
-                        <span
-                          className={styles.candidaturaBadge}
-                          style={{ backgroundColor: badgeBg, color: badgeColor }}
-                        >
-                          {badgeLabel}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
+            <div className={`${styles.perfilConteudo} ${candidaturasAbertoMobile ? styles.perfilConteudoAberto : ''}`}>
+              <div className={styles.filtroItemSelect} style={{ marginBottom: '15px' }}>
+                <select
+                  value={statusCandidaturaFiltro}
+                  onChange={(e) => setStatusCandidaturaFiltro(e.target.value)}
+                  className={styles.selectFiltro}
+                >
+                  <option value="">Status: Todos</option>
+                  <option value="novo">Nova Inscrição</option>
+                  <option value="analise">Em Análise</option>
+                  <option value="recusado">Recusado</option>
+                </select>
               </div>
-            )}
+
+              {minhasVagasInscritas.length === 0 ? (
+                <p className={styles.candidaturasVazio}>Nenhuma inscrição encontrada.</p>
+              ) : (
+                <div className={styles.candidaturasLista}>
+                  {minhasVagasInscritas.map((vaga) => {
+                    const dadosCand = minhasCandidaturasComStatus.find(c => c.vaga_id === vaga.id);
+                    const stts = dadosCand?.status || 'novo';
+                    let badgeLabel = 'Nova Inscrição', badgeBg = '#d1fae5', badgeColor = '#065f46';
+                    if (stts === 'analise') { badgeLabel = 'Em Análise'; badgeBg = '#fef3c7'; badgeColor = '#92400e'; } 
+                    else if (stts === 'recusado') { badgeLabel = 'Recusado'; badgeBg = '#fee2e2'; badgeColor = '#991b1b'; }
+                    return (
+                      <div key={vaga.id} className={styles.candidaturaItem}>
+                        <span className={styles.candidaturaVagaNome}>
+                          <strong className={styles.candidaturaCodigo}>[{vaga.codigo_vaga}]</strong> {vaga.titulo}
+                        </span>
+                        <div className={styles.candidaturaBadgeContainer}>
+                          <span className={styles.candidaturaBadge} style={{ backgroundColor: badgeBg, color: badgeColor }}>{badgeLabel}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
         </section>
 
-        {/* COLUNA 4: CANTO DIREITO ENCOSTADO - PERFIL PROFISSIONAL (FIXA) */}
         <section className={styles.perfilColuna}>
           <h3 className={styles.tituloSecaoEscorada}>Meu Perfil Profissional</h3>
           <div className={styles.perfilCard}>
-
-            {/* Header Desktop */}
             <div className={styles.perfilDesktopHeader}>
               <p className={styles.perfilSubtitulo}>Mantenha seu perfil atualizado para concorrer às vagas da agência.</p>
             </div>
-
-            {/* Botão Gatilho Mobile (Mantido conforme solicitado) */}
             <button
               className={styles.perfilToggleBtn}
               onClick={() => setPerfilAbertoMobile(!perfilAbertoMobile)}
               type="button"
             >
               <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '700' }}>📝 Meu Perfil Profissional</h3>
-              <span className={styles.perfilToggleBtnText}>
-                {perfilAbertoMobile ? '▲ Recolher' : '▼ Expandir'}
-              </span>
+              <span className={styles.perfilToggleBtnText}>{perfilAbertoMobile ? '▲ Recolher' : '▼ Expandir'}</span>
             </button>
-
-            {/* Conteúdo do Form */}
             <div className={`${styles.perfilConteudo} ${perfilAbertoMobile ? styles.perfilConteudoAberto : ''}`}>
-
               {perfilMsg && (
                 <div style={{ padding: '10px', borderRadius: '6px', marginBottom: '12px', fontSize: '13px', backgroundColor: perfilMsg.includes('✅') ? '#d1fae5' : '#fee2e2', color: perfilMsg.includes('✅') ? '#065f46' : '#991b1b' }}>
                   {perfilMsg}
                 </div>
               )}
-
               <form onSubmit={handleSalvarPerfil} className={styles.perfilForm}>
                 <div className={styles.formGroup}>
                   <label className={styles.formLabel}>Nome Completo</label>
@@ -434,53 +435,31 @@ export default function PainelPage() {
                   <label className={styles.formLabel}>Link do LinkedIn</label>
                   <input type="url" placeholder="https://linkedin.com/in/seu-perfil" value={linkedin} onChange={(e) => setLinkedin(e.target.value)} className={styles.formInput} />
                 </div>
-
                 <div className={styles.formGroup}>
                   <label className={styles.formLabel}>Arquivo de Currículo (PDF, DOCX)</label>
                   <label className={styles.uploadLabel}>
                     <span className={styles.uploadIcon}>📁</span>
-                    <span className={styles.uploadTextoPrincipal}>
-                      {arquivoSelecionado ? 'Alterar arquivo' : 'Selecionar Currículo'}
-                    </span>
-                    <span className={styles.uploadTextoSecundario}>
-                      {arquivoSelecionado ? arquivoSelecionado.name : 'PDF, DOC ou DOCX'}
-                    </span>
-                    <input
-                      type="file"
-                      accept=".pdf,.doc,.docx"
-                      onChange={(e) => setArquivoSelecionado(e.target.files?.[0] || null)}
-                      required={!curriculoUrl}
-                      style={{ display: 'none' }}
-                    />
+                    <span className={styles.uploadTextoPrincipal}>{arquivoSelecionado ? 'Alterar arquivo' : 'Selecionar Currículo'}</span>
+                    <span className={styles.uploadTextoSecundario}>{arquivoSelecionado ? arquivoSelecionado.name : 'PDF, DOC ou DOCX'}</span>
+                    <input type="file" accept=".pdf,.doc,.docx" onChange={(e) => setArquivoSelecionado(e.target.files?.[0] || null)} required={!curriculoUrl} style={{ display: 'none' }} />
                   </label>
-                  {curriculoUrl && (
-                    <p className={styles.uploadSucessoMsg}>
-                      <span>✓</span> Currículo ativo salvo.
-                    </p>
-                  )}
+                  {curriculoUrl && <p className={styles.uploadSucessoMsg}><span>✓</span> Currículo ativo salvo.</p>}
                 </div>
-
                 <div className={styles.formGroup}>
                   <span className={styles.formLabel}>Não tem um currículo pronto?</span>
-                  <Link href="/criarcurriculo" className={styles.btnCriarCurriculo}>
-                    ✨ Criar Currículo na Plataforma
-                  </Link>
+                  <Link href="/criarcurriculo" className={styles.btnCriarCurriculo}>✨ Criar Currículo na Plataforma</Link>
                 </div>
-
                 <div className={styles.formGroup}>
                   <label className={styles.formLabel}>Resumo de Competências</label>
                   <textarea rows={3} placeholder="Ex: Experiência com automações, desenvolvimento Next.js..." value={resumo} onChange={(e) => setResumo(e.target.value)} required className={styles.formTextarea} />
                 </div>
-
                 <button type="submit" disabled={salvandoPerfil} className={styles.btnSalvarPerfil}>
                   {salvandoPerfil ? 'Salvando...' : 'Salvar Dados'}
                 </button>
               </form>
             </div>
-
           </div>
         </section>
-
       </div>
     </div>
   );
