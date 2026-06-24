@@ -928,12 +928,12 @@
    NOVO: IMPLEMENTAÇÃO DO LIGHT MODE SENSÍVEL À CLASSE DINÂMICA
    ========================================================================== */
 .container.lightMode {
-  background-color: #f3f4f6; /* Fundo cinza bem claro */
-  color: #1f2937; /* Texto escuro */
+  background-color: #ffffff; /* Fundo principal branco */
+  color: #111827; /* Texto principal escuro */
 }
 
 .container.lightMode .headerTitle h1 {
-  background: linear-gradient(135deg, #111827 0%, #5d24b3 100%);
+  background: linear-gradient(135deg, #5d24b3 0%, #c084fc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -947,7 +947,7 @@
 .container.lightMode .categoriaVaga,
 .container.lightMode .localidadeVaga,
 .container.lightMode .modalHeaderGrid {
-  color: #4b5563;
+  color: #4b5563; /* Cinza suave para textos secundários */
 }
 
 .container.lightMode .header, 
@@ -956,18 +956,20 @@
 .container.lightMode .formContainer, 
 .container.lightMode .tableContainer, 
 .container.lightMode .modalContent {
-  background: rgba(0, 0, 0, 0.02);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  border: 1px solid #e5e7eb; /* Borda leve e elegante */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .container.lightMode .btnThemeToggle {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: #1f2937;
-  border-color: rgba(0, 0, 0, 0.1);
+  background-color: #f3f4f6;
+  color: #5d24b3;
+  border-color: #d1d5db;
 }
 
 .container.lightMode .btnThemeToggle:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #c084fc;
+  color: #ffffff;
 }
 
 .container.lightMode .cardValue,
@@ -983,14 +985,15 @@
 .container.lightMode .formInput, 
 .container.lightMode .formTextarea {
   color: #111827;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-color: rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  border-color: #d1d5db;
 }
 
 .container.lightMode .formInput:focus, 
 .container.lightMode .formTextarea:focus {
   background-color: #ffffff;
-  border-color: #5d24b3;
+  border-color: #5d24b3; /* Roxo principal no foco */
+  outline: 2px solid rgba(93, 36, 179, 0.1);
 }
 
 .container.lightMode .formInput::placeholder, 
@@ -999,20 +1002,20 @@
 }
 
 .container.lightMode .filterBar {
-  background-color: rgba(0, 0, 0, 0.01);
-  border-color: rgba(0, 0, 0, 0.06);
+  background-color: #f9fafb;
+  border-color: #e5e7eb;
 }
 
 .container.lightMode .tableHeadRow {
-  border-bottom-color: rgba(0, 0, 0, 0.1);
+  border-bottom-color: #e5e7eb;
 }
 
 .container.lightMode .tableBodyRow {
-  border-bottom-color: rgba(0, 0, 0, 0.05);
+  border-bottom-color: #f3f4f6;
 }
 
 .container.lightMode .tableBodyRow:hover {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: #f9fafb;
 }
 
 .container.lightMode .empresaVaga {
@@ -1020,33 +1023,34 @@
 }
 
 .container.lightMode .btnEditar {
-  background-color: rgba(0, 0, 0, 0.04);
-  color: #1f2937;
-  border-color: rgba(0, 0, 0, 0.1);
+  background-color: #f3f4f6;
+  color: #5d24b3;
+  border-color: #e5e7eb;
 }
 
 .container.lightMode .btnEditar:hover {
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: #5d24b3;
+  color: #ffffff;
 }
 
 .container.lightMode .modalOverlay {
-  background-color: rgba(243, 244, 246, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .container.lightMode .candidatoCard {
-  border-color: rgba(0, 0, 0, 0.08);
-  background-color: rgba(255, 255, 255, 0.5);
+  border-color: #e5e7eb;
+  background-color: #ffffff;
 }
 
 .container.lightMode .selectStatusCandidato {
   background-color: #ffffff;
   color: #111827;
-  border-color: rgba(0, 0, 0, 0.15);
+  border-color: #d1d5db;
 }
 
 .container.lightMode .candidatoResumoBox {
-  background-color: rgba(255, 255, 255, 0.7);
-  border-color: rgba(0, 0, 0, 0.05);
+  background-color: #f9fafb;
+  border-color: #e5e7eb;
 }
 
 .container.lightMode .candidatoResumoText {
@@ -1058,15 +1062,16 @@
 }
 
 .container.lightMode .btnTab:hover {
-  background-color: rgba(0, 0, 0, 0.04);
-  color: #111827;
+  background-color: #f3f4f6;
+  color: #5d24b3;
 }
 
 .container.lightMode .btnTab.active {
+  background-color: #5d24b3;
   color: #ffffff;
 }
 
 .container.lightMode .chartTrack {
-  background-color: rgba(0, 0, 0, 0.05);
-  border-color: rgba(0, 0, 0, 0.05);
+  background-color: #e5e7eb;
+  border-color: #e5e7eb;
 }
