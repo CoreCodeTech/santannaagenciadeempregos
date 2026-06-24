@@ -97,7 +97,11 @@ export default function LoginPage() {
     <div className={styles.container}>
       
       <div className={styles.logoContainer}>
-        <div className={styles.logoEmoji}>💼</div>
+        <img 
+          src="https://santannaagenciadeempregos.com.br/img/logo.png" 
+          alt="Logo Sant'Anna" 
+          className={styles.logoImage} 
+        />
         <span className={styles.logoMain}>Sant'Anna</span>
         <span className={styles.logoSubtitle}>Portal de Vagas</span>
       </div>
