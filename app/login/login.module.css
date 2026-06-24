@@ -8,6 +8,7 @@
   --transition-apple: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+
 .container {
   display: flex;
   flex-direction: column;
@@ -248,4 +249,12 @@
 
 .btnToggle:hover {
   opacity: 0.8;
+}
+
+.logoImage {
+  width: 200px; /* Ajuste o tamanho conforme necessário */
+  height: auto; /* Mantém a proporção da imagem */
+  margin-bottom: 10px; /* Espaçamento para o texto abaixo */
+  border-radius: 15px; /* Adiciona cantos arredondados, se desejar */
+  box-shadow: 4px 4px 30px var(--accent-color); /* Adiciona uma sombra suave */
 }
